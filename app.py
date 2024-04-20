@@ -3,8 +3,7 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 # Initialize the status
-STATUS = True
-
+global STATUS
 # Endpoint to get the status
 @app.route('/status', methods=['GET'])
 def get_status():
@@ -12,7 +11,6 @@ def get_status():
 
 @app.route('/status', methods=['POST'])
 def update_status():
-    global STATUS
     STATUS = request.json.get('status')
     return jsonify({'status': STATUS})
 
