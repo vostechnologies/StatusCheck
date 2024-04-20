@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 # Initialize the status
 global STATUS
+STATUS = True
 # Endpoint to get the status
 @app.route('/status', methods=['GET'])
 def get_status():
