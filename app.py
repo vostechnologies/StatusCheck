@@ -17,21 +17,18 @@ def write_status(status):
     with open(STATUS_FILE, 'w') as f:
         json.dump({'status': status}, f)
 
-STATUS = read_status()
 
 @app.route('/status', methods=['GET'])
 def get_status():
-    return jsonify({'status': STATUS})
+    return jsonify({'status': read_status()})
 
 @app.route('/status', methods=['POST'])
 def update_status():
-    global STATUS
     new_status = request.json.get('status')
     check = request.json.get('check')
     if (check == "69420"):
-        STATUS = new_status
         write_status(new_status)
-        return jsonify({'msg': "Status Changed Successfully!", 'status': STATUS})
+        return jsonify({'msg': "Status Changed Successfully!", 'status': new_status})
     else:
         return jsonify({'msg': "Invalid Check!"})
 
